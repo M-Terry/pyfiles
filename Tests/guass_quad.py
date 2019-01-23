@@ -42,5 +42,5 @@ def guass_quad(f,a,b,k):
 	I = it*(b-a)/2
 	return  np.squeeze(np.asarray(I))
 # test
-I = guass_quad('math.exp(-x**2)',0,2,5)
+I = guass_quad('math.sqrt(1.0 + (1.0 / np.cos(x))**4.0)',0, (math.pi / 4.0),2)
 print I
