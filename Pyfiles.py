@@ -84,14 +84,6 @@ class PyFiles(object):
 	def erf2(self):
 		return 0.995322265018953
 
-	def interp1(self,x,y,xi,itype = -1):
-		if itype == -1:
-			set_interp = interp1d(x, y)
-		else:
-			set_interp = interp1d(x, y, kind=itype)
-		new_y = set_interp(new_x)
-		return new_y
-
 	# Calculate coefficients of Lagrange Functions
 	def lagrange_coef(self,x,y):
 		d = [1]*len(x)
