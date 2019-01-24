@@ -1,4 +1,8 @@
+# Created by Matthew Terry and James Faunda
+
+import numpy as np
 import math
+from scipy import integrate
 
 def feval(f,a):
 	arr = []
@@ -13,41 +17,28 @@ class PyFiles(object):
 	def __init__(self):
 		pass
 
-
-
-	def trap(self,f,a,b,n):
+	# find integral of f using trapezoidal rule
+	# n must be even
+	def trapezoidal(self, f, a, b, n):
 		'''
 		INPUT: function in strings in terms of x, lower bound, upper bound, itereation
 		OUTPUT: Integral
 		'''
-		h = (float(b)-float(a))/float(n)
-		S = feval(f,[a])
-		x = []
-		for c,i in enumerate(range(1,n+1)):
-			x.append(float(a)+float(h)*float(i))
-			S = S+2*feval(f,[x[c]])
-		S = S+feval(f,[b])
-		I = h * S/2
-		return I
+		h = (b-a) / float(n)
+		s = 0.5*(feval(f,[a]) + feval(f,[b]))
+		for i in range(1,n,1):
+			s = s + feval(f,[a + i*h])
+		return s * h
 
-	def simp(self,f,a,b,n):
+	# find integral of f using composite Simpson rule
+	# n must be even
+	def simpson(self,f,a,b,n):
 		'''
 		INPUT: function in strings in terms of x, lower bound, upper bound, itereation
 		OUTPUT: Integral
 		'''
-		h=(float(b)-float(a))/float(n);
-		S=feval(f,[a])
-		x = []
-		for c,i in enumerate(range(1,n,2)):
-			x.append(float(a)+float(h)*float(i))
-			S=S+4*feval(f,[x[c]])
-		x = []
-		for c,i in enumerate(range(2,n+1,2)):
-			x.append(float(a)+float(h)*float(i))
-			S=S+2*feval(f,[x[c]])
-		S=S+feval(f,[b])
-		I=h*S/3
-		return I
+		x = np.linspace(a, b, n + 1)
+		return integrate.simps(feval(f,[x]), x)
 
 	# find integral of function f on [a,b]
 	# using Gaussian quadrature at k(k=2,...5)points
@@ -88,3 +79,6 @@ class PyFiles(object):
 		it = y*cd
 		I = it*(b-a)/2
 		return  np.squeeze(np.asarray(I))
+
+	def erf2(self):
+		return 0.995322265018953
