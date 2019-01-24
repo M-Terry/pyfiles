@@ -15,7 +15,7 @@ def feval(f,a):
 
 # find integral of function f on [a,b]
 # using Gaussian quadrature at k(k=2,...5)points
-def guass_quad(f,a,b,k):
+def Gauss_quad(f,a,b,k):
 	'''
 	INPUT: function in strings in terms of x, lower bound, upper bound, iterations
 	OUTPUT: single int gaussian
@@ -54,6 +54,6 @@ def guass_quad(f,a,b,k):
 	return  np.squeeze(np.asarray(I))
 
 # example
-ss = 'math.sqrt(1 + math.exp(x)**2)'
-I = guass_quad(ss,0,2,2)
+ss = 'math.sqrt(1.0 + (1.0 / math.cos(x))**4.0)'
+I = Gauss_quad(ss,0.0,(np.pi/4.0),2)
 print I
