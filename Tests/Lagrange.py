@@ -5,14 +5,13 @@ Created on Tue Jan 24 16:30:00 2019
 """	
 # Calculate coefficients of Lagrange Functions
 def lagrange_coef(x,y):
-	d = []
+	d = [1]*len(x)
 	c = [0]*len(x)
 	for k in range(len(x)):
-		d.append(1)
 		for i in range(len(x)):
 			if i != k:
-				d[k] = d[k]*(x[k]-x[i])
-			c[k] = (y[k]/d[k])
+				d[k] = float(d[k])*(float(x[k])-float(x[i]))
+			c[k] = (float(y[k])/float(d[k]))
 	return c
 
 # Evaluate Lagrange interpolation polynomial at x=t
