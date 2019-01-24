@@ -3,6 +3,7 @@
 import numpy as np
 import math
 from scipy import integrate
+from scipy.interpolate import interp1d
 
 def feval(f,a):
 	arr = []
@@ -82,3 +83,38 @@ class PyFiles(object):
 
 	def erf2(self):
 		return 0.995322265018953
+
+	def interp1(self,x,y,xi,itype = -1):
+		if itype == -1:
+			set_interp = interp1d(x, y)
+		else:
+			set_interp = interp1d(x, y, kind=itype)
+		new_y = set_interp(new_x)
+		return new_y
+
+	# Calculate coefficients of Lagrange Functions
+	def lagrange_coef(self,x,y):
+		d = [1]*len(x)
+		c = [0]*len(x)
+		for k in range(len(x)):
+			for i in range(len(x)):
+				if i != k:
+					d[k] = float(d[k])*(float(x[k])-float(x[i]))
+				c[k] = (float(y[k])/float(d[k]))
+		return c
+
+	# Evaluate Lagrange interpolation polynomial at x=t
+	def lagrange_eval(self,t,x,c):
+		p = []
+		
+		for i in range(len(t)):
+			p.append(0)
+			N = []
+			N = [1]*len(x)
+			for j in range(len(x)):
+				for k in range(len(x)):
+					if j != k:
+						N[j] = float(N[j])*(float(t[i]) - float(x[k]))
+				p[i] = float(p[i])+float(N[j])*float(c[j])
+		return p
+

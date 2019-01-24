@@ -1,4 +1,8 @@
-import pdb
+"""
+Created on Tue Jan 24 16:30:00 2019
+
+@author: Matthew Terry
+"""	
 # Calculate coefficients of Lagrange Functions
 def lagrange_coef(x,y):
 	d = []
@@ -23,7 +27,6 @@ def lagrange_eval(t,x,c):
 			#pdb.set_trace()
 			for k in range(len(x)):
 				if j != k:
-					print N[j]
 					N[j] = float(N[j])*(float(t[i]) - float(x[k]))
 			p[i] = float(p[i])+float(N[j])*float(c[j])
 	return p
