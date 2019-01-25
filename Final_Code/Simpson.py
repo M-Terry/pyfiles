@@ -22,5 +22,5 @@ def Simpson(f,a,b,n):
 
 # example
 ss = 'np.exp(-(np.float64(x)**np.float64(2.0)))'
-I = Simpson(ss,0,1,5)
+I = (np.float64(2.0)/np.sqrt(np.pi)) * Simpson(ss,0.0,2.0,3000)
 print I
