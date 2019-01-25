@@ -24,6 +24,6 @@ def Trapezoidal(f, a, b, n):
 
 # example
 ss = 'np.exp(-(np.float64(x)**np.float64(2.0)))'
-I = Trapezoidal(ss,0,1.5,500)
+I = (np.float64(2.0)/np.sqrt(np.pi)) * Trapezoidal(ss,0.0,2.0,3000)
 print I
 
