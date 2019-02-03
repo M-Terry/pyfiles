@@ -29,7 +29,7 @@ def Secant(f,a,b,tol,iterate):
             print 'exact zero found'
             break;
         count = i
-    if count > iterate:
+    if count >= iterate:
         print 'zero not found to desired tolerance'
     return x[-1], y[-1]
 

@@ -46,7 +46,7 @@ def Falsi(f,aa,bb,tol,iterate):
             print 'Falsi method has converged'
             break;
         count = i
-    if count > iterate:
+    if count >= iterate:
         print 'zeros not found to disired tolerance'
     n = len(x)
     k = [g for g in range(n)]

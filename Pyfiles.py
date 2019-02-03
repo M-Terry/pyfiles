@@ -209,7 +209,7 @@ class PyFiles(object):
 				print 'Falsi method has converged'
 				break;
 			count = i
-		if count > iterate:
+		if count >= iterate:
 			print 'zeros not found to disired tolerance'
 		n = len(x)
 		k = [g for g in range(n)]
@@ -233,7 +233,7 @@ class PyFiles(object):
 				print 'exact zero found'
 				break;
 			count = i
-		if count > iterate:
+		if count >= iterate:
 			print 'zero not found to desired tolerance'
 		return x[-1], y[-1]
 
