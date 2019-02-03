@@ -7,10 +7,10 @@ def feval(f,a):
 		arr.append(eval(f))
 	return sum(arr)
 
-def Newtons_Zero(self, dself, ddself, x1, tol, iter):
+def Newtons_Zero(self, dself, ddself, a, b, tol, iter):
 	#Input: Function (string), 1st of Function (string), 2nd Derivative of Function (string), initial guess, tolerance, max # iterations
 	#Output:
-	x = [x1]
+	x = [(a+b)/2]
 	y = [feval(self, [x[0]])]
 	y_pr = [feval(dself, [x[0]])]
 	y_prpr = [feval(ddself,[x[0]])]
@@ -28,4 +28,4 @@ def Newtons_Zero(self, dself, ddself, x1, tol, iter):
 func = 'x**2-2'
 dfunc = '2*x'
 ddfunc = '2'
-Newtons_Zero(func, dfunc, ddfunc, 2, .0001, 400)
+Newtons_Zero(func, dfunc, ddfunc, 0, 4, .0001, 400)
