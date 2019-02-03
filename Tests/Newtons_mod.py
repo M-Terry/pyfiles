@@ -8,8 +8,8 @@ def feval(f,a):
 	return sum(arr)
 
 def Newtons_Zero(self, dself, ddself, a, b, tol, iter):
-	#Input: Function (string), 1st of Function (string), 2nd Derivative of Function (string), initial guess, tolerance, max # iterations
-	#Output:
+	#Input: Function (string), 1st of Function (string), 2nd Derivative of Function (string), [a,b] - bounds containing zero, tolerance, max # iterations
+	#Output: Array of iteration values
 	x = [(a+b)/2]
 	y = [feval(self, [x[0]])]
 	y_pr = [feval(dself, [x[0]])]
