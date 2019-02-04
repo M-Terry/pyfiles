@@ -170,8 +170,8 @@ class PyFiles(object):
 			out[i,3] = x[0,i]
 			out[i,4] = y[0,i]
 		np.set_printoptions(precision = 16)
-		print '  step        a         b          x          y'
-		print out
+		#print '  step        a         b          x          y'
+		#print out
 		return out
 
 	def falsi(self,f,aa,bb,tol,iterate):
