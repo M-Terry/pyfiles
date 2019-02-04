@@ -19,6 +19,7 @@ def Secant(f,a,b,tol,iterate):
     x.append(b)
     y.append(float(feval(f,[x[0]])))
     y.append(float(feval(f,[x[1]])))
+    count = 0
     for i in range(1,iterate):
         x.append(x[i]-y[i]*(x[i]-x[i-1])/(y[i]-y[i-1]))
         y.append(float(feval(f,[x[i+1]])))

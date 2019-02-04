@@ -110,71 +110,71 @@ class PyFiles(object):
 				p[i] = float(p[i])+float(N[j])*float(c[j])
 		return p
 
-	def bisect(fun,a,b,tol,maxIter):
-	"""
-	      Input and output variables
-	 fun       string containing name of function
-	 [a,b]     interval containing zero
-	 tol       allowable tolerance in computed zero
-	 maxIter   maximum number of iterations
-	 x         vector of approximations to zero
-	 y         vector of function values, fun(x)
+	def bisect(self,fun,a,b,tol,maxIter):
+		"""
+		 Input and output variables
+		 fun       string containing name of function
+		 [a,b]     interval containing zero
+		 tol       allowable tolerance in computed zero
+		 maxIter   maximum number of iterations
+		 x         vector of approximations to zero
+		 y         vector of function values, fun(x)
 
-	"""
-	A = np.empty([1,maxIter])
-	B = np.empty([1,maxIter])
-	x = np.empty([1,maxIter])
-	y = np.empty([1,maxIter])
-	ya = np.empty([1,maxIter])
-	yb = np.empty([1,maxIter])
-	A[0,0] = a
-	B[0,0] = b
-	ya[0,0] = feval(fun,[A[0,0]])
-	yb[0,0] = feval(fun,[B[0,0]])
-	if ya[0,0] * yb[0,0] > 0.0:
-		print 'Function has same sign at end points'
-		return
+		"""
+		A = np.empty([1,maxIter])
+		B = np.empty([1,maxIter])
+		x = np.empty([1,maxIter])
+		y = np.empty([1,maxIter])
+		ya = np.empty([1,maxIter])
+		yb = np.empty([1,maxIter])
+		A[0,0] = a
+		B[0,0] = b
+		ya[0,0] = feval(fun,[A[0,0]])
+		yb[0,0] = feval(fun,[B[0,0]])
+		if ya[0,0] * yb[0,0] > 0.0:
+			print 'Function has same sign at end points'
+			return
 
-	for i in range(0,maxIter-1):
-		x[0,i] = (A[0,i] + B[0,i]) / 2
-		y[0,i] = feval(fun,[x[0,i]])
-		if (x[0,i] - A[0,i]) < tol:
-			print 'Bisection method has converged'
-			break
-		elif y[0,i] == 0.0:
-			print 'exact zero found'
-			break
-		elif y[0,i] * ya[0,i] < 0:
-			A[0,i+1] = A[0,i]
-			ya[0,i+1] = ya[0,i]
-			B[0,i+1] = x[0,i]
-			yb[0,i+1] = y[0,i]
-		else:
-			A[0,i+1] = x[0,i]
-			ya[0,i+1] = y[0,i]
-			B[0,i+1] = B[0,i]
-			yb[0,i+1] = yb[0,i]
+		for i in range(0,maxIter-1):
+			x[0,i] = (A[0,i] + B[0,i]) / 2
+			y[0,i] = feval(fun,[x[0,i]])
+			if (x[0,i] - A[0,i]) < tol:
+				print 'Bisection method has converged'
+				break
+			elif y[0,i] == 0.0:
+				print 'exact zero found'
+				break
+			elif y[0,i] * ya[0,i] < 0:
+				A[0,i+1] = A[0,i]
+				ya[0,i+1] = ya[0,i]
+				B[0,i+1] = x[0,i]
+				yb[0,i+1] = y[0,i]
+			else:
+				A[0,i+1] = x[0,i]
+				ya[0,i+1] = y[0,i]
+				B[0,i+1] = B[0,i]
+				yb[0,i+1] = yb[0,i]
 
-		iteration = i
+			iteration = i
 
-	if (iteration >= maxIter):
-		print 'zero not found to desired tolerance'
+		if (iteration >= maxIter):
+			print 'zero not found to desired tolerance'
 
-	n = i+1
-	k = np.linspace(1,n,n)
-	out = np.zeros((n,5))
-	for i in range(n):
-		out[i,0] = k[i]
-		out[i,1] = A[0,i]
-		out[i,2] = B[0,i]
-		out[i,3] = x[0,i]
-		out[i,4] = y[0,i]
-	np.set_printoptions(precision = 16)
-	print '  step        a         b          x          y'
-	print out
-	return out
+		n = i+1
+		k = np.linspace(1,n,n)
+		out = np.zeros((n,5))
+		for i in range(n):
+			out[i,0] = k[i]
+			out[i,1] = A[0,i]
+			out[i,2] = B[0,i]
+			out[i,3] = x[0,i]
+			out[i,4] = y[0,i]
+		np.set_printoptions(precision = 16)
+		print '  step        a         b          x          y'
+		print out
+		return out
 
-	def falsi(f,aa,bb,tol,iterate):
+	def falsi(self,f,aa,bb,tol,iterate):
 		a = []
 		b = []
 		ya = []
@@ -216,13 +216,14 @@ class PyFiles(object):
 		# out = [k' a(1:n)' b(1:n)' x'  y'];
 		return x[count], y
 
-	def Secant(f,a,b,tol,iterate):
+	def secant(self,f,a,b,tol,iterate):
 		x = []
 		y = []
 		x.append(a)
 		x.append(b)
 		y.append(float(feval(f,[x[0]])))
 		y.append(float(feval(f,[x[1]])))
+		count = 0
 		for i in range(1,iterate):
 			x.append(x[i]-y[i]*(x[i]-x[i-1])/(y[i]-y[i-1]))
 			y.append(float(feval(f,[x[i+1]])))
@@ -237,7 +238,7 @@ class PyFiles(object):
 			print 'zero not found to desired tolerance'
 		return x[-1], y[-1]
 
-	def Newtons_Zero(self, dself, ddself, a, b, tol, iter):
+	def newtons_zero(self, dself, ddself, a, b, tol, iter):
 		#Input: Function (string), 1st of Function (string), 2nd Derivative of Function (string), [a,b] - bounds containing zero, tolerance, max # iterations
 		#Output: Array of iteration values
 		x = [(a+b)/2]
@@ -252,6 +253,6 @@ class PyFiles(object):
 			y_pr.append(feval(dself,[x[i]]))
 			y_prpr.append(feval(ddself,[x[i]]))
 			iteration=i
-		return print(x)
+		return x
 
 
